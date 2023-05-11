@@ -1,0 +1,94 @@
+.container {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  .formModel {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formdata {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  .selectResult{
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f2f2f2;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  input,
+  textarea {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f2f2f2;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    resize: vertical;
+  }
+  
+  
+  textarea {
+    height: 100px;
+  }
+  input::placeholder,
+textarea::placeholder {
+  color: #141212; /* Set the placeholder text color */
+}
+
+  h1 {
+    margin-top: 0;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  .Buttonforedit {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  button[type='button'] {
+
+    padding: 10px 20px;
+  
+    font-size: 18px;
+  
+    font-weight: bold;
+  
+    color: #fff;
+  
+    background-color: #29abe2;
+  
+    border: none;
+  
+    border-radius: 5px;
+  
+    cursor: pointer;
+  
+    transition: background-color 0.3s ease;
+  
+  }
+  
+  
