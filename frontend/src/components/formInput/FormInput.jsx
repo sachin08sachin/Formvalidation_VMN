@@ -11,6 +11,7 @@ function FormInput() {
     configuration: '',
     test_steps: '',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     test_log: '',
+    log_analysis_01: null,
     log_analysis: '',
     result: '',
   });
@@ -27,27 +28,88 @@ function FormInput() {
     event.preventDefault();
 
     // Check if all required fields have been filled
-    if (
-      formData.testcase_id === '' ||                     
-      formData.name === '' ||
-      formData.component === '' ||
-      formData.result === '' ||
-      formData.topology === '' ||
-      formData.configuration === '' ||
-      formData.test_steps === '' ||
-      formData.test_log === '' ||
-      formData.log_analysis === ''
-    ) {
-      alert('Please fill in all required fields');
+    // if (
+    //   formData.testcase_id === '' ||                     
+    //   formData.name === '' ||
+    //   formData.component === '' ||
+    //   formData.result === '' ||
+    //   formData.topology === '' ||
+    //   formData.configuration === '' ||
+    //   formData.test_steps === '' ||
+    //   formData.test_log === '' ||
+    //   formData.log_analysis === ''
+    // ) {
+    //   alert('Please fill in all required fields');
+    //   return;
+    // }
+
+    const alphanumeric = /^[0-9a-zA-Z]+$/;
+if (!formData.testcase_id.match(alphanumeric) || formData.testcase_id === '') {
+  alert('Test Case ID should contain only alphanumeric characters');
+  return;
+}
+if (!formData.name.match(alphanumeric) || formData.name === '') {
+  alert('Name should contain only alphanumeric characters');
+  return;
+}
+if (formData.component === '') {
+  alert('Component Involved field is required');
+  return;
+}
+if (formData.configuration.length > 5000) {
+  alert('Configuration should not exceed 5000 words');
+  return;
+}
+
+if (formData.test_steps.length > 5000) {
+  alert('Test Steps should not exceed 5000 words');
+  return;
+}
+
+if (formData.test_log.length > 5000) {
+  alert('Test Log should not exceed 5000 words');
+  return;
+}
+
+if (formData.log_analysis.length > 5000) {
+  alert('Log Analysis should not exceed 5000 words');
+  return;
+}
+const validFileTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+if (formData.topology) {
+  if (!validFileTypes.includes(formData.topology.type)) {
+    alert('Topology should be either an image or a pdf file');
+    return;
+  }
+
+  if (formData.topology.size > 5000000) {
+    alert('Topology(img/pdf) should not exceed 5 MB');
+    return;
+  }
+  //for testlog_analysis
+  if (formData.log_analysis_01) {
+    if (!validFileTypes.includes(formData.log_analysis_01.type)) {
+      alert('log_analysis should be either an image or a pdf file');
       return;
     }
+  
+    if (formData.log_analysis_01.size > 5000000) {
+      alert('log_analysis(img/pdf) should not exceed 5 MB');
+      return;
+    }
+
+}}
+
+
+
+
     try {
       const data = new URLSearchParams();
       for (const [key, value] of Object.entries(formData)) {
         data.append(key, value);
       }
     
-      const response = await axios.post('http://localhost:5001/api/form', data);
+      const response = await axios.post('http://localhost:5000/api/form', data);
       console.log(response.data);
       alert('Form submitted successfully!');
       console.log(formData);
@@ -140,6 +202,18 @@ function FormInput() {
           </div>
 
           <div className="formdata">
+            <label htmlFor="tlog_analysis_01">Log Analysis(img/pdf):</label>
+            <input
+              type="file"
+              id="log_analysis_01"  
+              name="log_analysis_01"
+              accept="image/*"
+              onChange={handleChange}
+            />
+          </div>
+          
+
+          <div className="formdata">
             <label htmlFor="tlog_analysis">Log Analysis:</label>
             <textarea
               id="log_analysis"
@@ -175,4 +249,5 @@ function FormInput() {
       </div>
   );
 }
-export default FormInput
+
+export default FormInput 
